@@ -1,105 +1,89 @@
-<img src="resources/readme/logo.png" alt="PAG Logo" width="553"/>
 
-[![license](https://img.shields.io/badge/license-Apache%202-blue)](https://github.com/Tencent/libpag/blob/master/LICENSE.txt) 
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Tencent/libpag/pulls) 
-[![codecov](https://codecov.io/gh/Tencent/libpag/branch/main/graph/badge.svg)](https://codecov.io/gh/Tencent/libpag)
-[![Actions Status](https://github.com/Tencent/libpag/workflows/autotest/badge.svg?branch=main)](https://github.com/Tencent/libpag/actions)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/Tencent/libpag)](https://github.com/Tencent/libpag/releases)
 
-English | [简体中文](./README.zh_CN.md) | [Homepage](https://pag.art)
+## 介绍
 
-## Introduction
+libpag-android 是  PAG (Portable Animated Graphics) 动效文件的渲染 SDK，目前已覆盖几乎所有的主流平台，包括：iOS, Android, macOS,
+Windows, Linux, 以及 Web 端。
 
-libpag is a real-time rendering library for PAG (Portable Animated Graphics) files that renders both
-vector-based and raster-based animations across most platforms, such as iOS, Android, macOS,
-Windows, Linux, and Web.
+PAG 方案是一套完善的动效工作流。提供从 AE（Adobe After Effects）导出插件，到桌面预览工具 PAGViewer，再到各端的跨平台渲染 SDK。
+目标是降低或消除动效研发相关的成本，打通设计师创作到素材交付上线的极简流程，不断输出运行时可编辑的高质量动效内容。
 
-PAG is an open-source file format for recording animations. PAG files can be created and exported
-from Adobe After Effects with the PAGExporter plugin and previewed in the PAGViewer app, which you
-can get from [pag.art](https://pag.art), and both of them are available on both macOS and Windows.
+PAG 方案目前已经接入了腾讯系 40 余款应用，包括微信，手机QQ，王者荣耀，腾讯视频，QQ音乐等头部产品，稳定性经过了海量用户的持续验证，可以广泛应用于UI动画、贴纸动画、视频编辑、模板设计等场景。典型应用场景可以参考[官网案例](https://pag.art/case.html)。
 
-PAG is now being used by 40+ Tencent apps, such as WeChat, Mobile QQ, Honor of Kings Mobile Game,
-Tencent Video, QQ Music, and so on, reaching hundreds of millions of users.
+详细介绍可以参考相关报道：
 
-## Advantages
+- [王者QQ微信都在用的动画神器要开源了：把交付时间缩短90%](https://mp.weixin.qq.com/s/a8-yOp8h5LiFGKSdLE_toA)
+- [腾讯推出移动端动画组件PAG，释放设计生产力](https://mp.weixin.qq.com/s/STxOMV2lqGdGu-9mBkAz_A)
 
-- **Highly efficient file format**
+## PAG 优势
+
+- **高效的文件格式**
 
 <img src="resources/readme/intro_1.png" alt="intro_1" width="282"/>
 
-Benefiting from the highly efficient binary format design, PAG files can be decoded 10x faster than
-JSON files but also are about 50% smaller in file size when exporting the same animations. Designers
-can also ship beautiful animations with bitmaps or audiovisual media integrated into a single file
-easily without other attachments.
+采用可扩展的二进制文件格式，可单文件集成图片音频等资源，实现快速交付。导出相同的 AE 动效内容，在文件解码速度和压缩率上均大幅领先于同类型方案。
 
-- **All AE features supported**
+- **全 AE 特性支持**
 
 <img src="resources/readme/intro_2.png" alt="intro_2" width="282"/>
 
-While other solutions may only support exporting limited vector-based AE features, PAG supports
-exporting all AE animations into a single file by combining vector-based exporting with raster-based
-exporting techniques. Therefore, third-party plugin effects in AE can be exported as well.
+在纯矢量导出方式上支持更多 AE 特性的同时，还引入了BMP预合成结合矢量的混合导出能力，实现支持所有 AE 特性的同时又能保持动效运行时的可编辑性。
 
-- **Measurable performance**
+- **性能监测可视化**
 
 <img src="resources/readme/intro_4.png" alt="intro_4" width="282"/>
 
-PAG provides a monitoring panel in PAGViewer that shows normalized performance data for PAG files,
-which helps designers to examine and optimize performance easily without developers. Along with
-dozens of automatic optimization techniques from the PAGExporter plugin, animations with cool visual
-effects and excellent performance now can be created more effectively.
+通过导出插件内置的自动优化策略，以及预览工具集成的性能监测面板，能够直观地看到每个素材的性能状态，以帮助设计师制作效果和性能俱佳的动画特效。
 
-- **Runtime editable animations**
+- **运行时可编辑**
 
 <img src="resources/readme/intro_5.png" alt="intro_5" width="282"/>
 
-With the flexible editing APIs from PAG SDK, developers can easily change the layer structure of a
-single PAG file, mix multiple PAG files into one composition, or replace texts and images with all
-pre-designed animation effects applied at runtime. It reduces tons of coding work for product
-features like video templates.
+运行时，可在保留动效效果前提下，动态修改替换文本或替换占位图内容，甚至对任意子图层进行增删改及移动，轻松实现照片和视频模板等素材的批量化生产。
 
-## System Requirements
+## 系统要求
 
-- iOS 9.0 or later
-- Android 4.4 or later
-- macOS 10.13 or later
-- Windows 7.0 or later
-- Chrome 69.0 or later (Web)
-- Safari 11.3 or later (Web)
+- iOS 9.0 版本及以上
+- Android 4.4 版本及以上
+- macOS 10.13 版本及以上
+- Windows 7.0 版本及以上
+- Chrome 69.0 版本及以上
+- Safari 11.3 版本及以上
 
-## Getting Started
+## 快速接入
 
-We currently only publish precompiled libraries for iOS, Android, and Web. You can build libraries of
-other platforms from the source code. The latest releases can be downloaded
-from [here](https://github.com/Tencent/libpag/releases).
+由于大部分平台没有统一的上层业务框架，目前我们暂时只为 iOS, Android 和 Web 平台定期发布预编译的二进制库，其他平台的库需要通过
+源码根据自己的实际需求调整参数进行编译。移动端最新的release库可以在 [这里](https://github.com/Tencent/libpag/releases)
+下载。 详细的 SDK接入文档可以参考 [SDK 接入](https://pag.art/docs/sdk.html) 。Web 平台的接入文档可以参考 [Web SDK
+接入](./web/README.md)
 
-### iOS Integration
+### iOS 端接入
 
-You can use the framework downloaded from the release page, or add libpag to your project by
-CocoaPods:
-Add the pod to your Podfile:
+可以从 [release](https://github.com/Tencent/libpag/releases) 页面下载预编译的二进制库，或者通过CocoaPods接入
+
+在Podfile中添加libpag依赖:
 
 ```
 pod 'libpag'
 ```
 
-And then run:
+然后运行:
 
 ```
 pod install
 ```
 
-After installing the cocoapod into your project import libpag with
+然后在项目中引入libpag的头文件
 
 ```
 #import <libpag/xxx.h>
 ```
 
-### Android Integration
+### Android 端接入
 
-You can use the aar downloaded from the release page, or add libpag to your project by Maven:
+可以从 [release](https://github.com/Tencent/libpag/releases) 页面下载预编译的 aar 库文件，或者通过 Maven 将 libpag 添加到你的项目中：
 
-Edit the `build.gradle` file in the root of your project, add `mavenCentral()` to `repositories`:
+编辑工程根目录下的 `build.gradle` 文件, 在`repositories`下面添加 `mavenCentral()`  :
 
 ```
 buildscript {
@@ -112,7 +96,7 @@ buildscript {
 }
 ```
 
-Add libpag to `app/build.gradle` (*`4.0.5.10` should be replaced with the latest release version*):
+在 `app/build.gradle`中添加libpag依赖 (*`4.0.5.10` 应替换为最新发布版本*):
 
 ```
 dependencies {
@@ -120,18 +104,18 @@ dependencies {
 }
 ```
 
-Add the following rule to your proguard rules to avoid the wrong obfuscation.
+在混淆列表里面，添加libpag的keep规则
 
 ```
   -keep class org.libpag.** {*;}
   -keep class androidx.exifinterface.** {*;}
 ```
 
-Finally, run gradle sync and then build the project.
+配置完以后，sync一下，再编译即可。
 
-### Web Integration
+### Web 端接入
 
-Simply copy the following code into an HTML file and open it in your browser:
+直接拷贝如下代码，然后在浏览器中运行即可：
 
 ```html
 <canvas class="canvas" id="pag"></canvas>
@@ -148,118 +132,113 @@ Simply copy the following code into an HTML file and open it in your browser:
   });
 </script>
 ```
-More information：[Web SDK Guide](./web/README.md)
+Web 端更多接入方式请参考：[Web端接入指南](https://pag.art/docs/sdk-web.html)
 
+### 范例工程
 
-### Example
-
-Check out the following projects to learn how to use the APIs of libpag:
+我们准备了如下各端的 Demo 工程，检出对应平台的 Demo 工程可以快速开始学习如何使用 libpag 的 API：
 
 - [https://github.com/libpag/pag-ios](https://github.com/libpag/pag-ios)
 - [https://github.com/libpag/pag-android](https://github.com/libpag/pag-android)
 - [https://github.com/libpag/pag-web](https://github.com/libpag/pag-web)
 
-### Documentation
+### API 手册：
 
-- [iOS API Reference](https://pag.art/api.html#/apis/ios/)
-- [Android API Reference](https://pag.art/api.html#/apis/android/org/libpag/package-summary.html)
-- [Web API Reference](https://pag.art/api.html#/apis/web/)
+- [iOS API 参考](https://pag.art/api.html#/apis/ios/)
+- [Android API 参考](https://pag.art/api.html#/apis/android/org/libpag/package-summary.html)
+- [Web API 参考](https://pag.art/api.html#/apis/web/)
 
-You can find other docs on [pag.art](https://pag.art/docs/mobile-sdk-guide.html)
+更多的其他文档可以访问官网  [pag.art](https://pag.art/docs/mobile-sdk-guide.html) 获得。
 
-## Development
+## 开发指南
 
-We recommend using CLion IDE on the macOS platform for development.
+**如果您希望参与到 libpag 项目的源码开发中，请务必严格按照以下步骤先配置完开发环境再进行开发和调试。**
 
-### Branch Management
+我们推荐使用 CLion 并在 macOS 平台上进行开发。
 
-- The `main` branch is our active developing branch which contains the latest features and bugfixes. 
-- The branches under `release/` are our stable milestone branches which are fully tested. We will 
-periodically cut a `release/{version}` branch from the `main` branch. After one `release/{version}` 
-branch is cut, only high priority fixes are checked into it.
+### 分支介绍
 
-**Note: This repository only contains the latest code since PAG 4.0. To use the legacy PAG 3.0 
-versions, you can download the precompiled libraries from [here](https://github.com/Tencent/libpag/releases).**
+`main` 分支是我们主要的开发分支，日常会有频繁的修改合入。`main` 分支稳定后会不定期创建发布分支 `release/{version}`。`release/` 下
+的分支是我们推荐的在生产环境中使用的稳定版本。稳定版本一旦拉取出分支后，将不再合入新功能，只做缺陷问题的修复。
 
-### Build Prerequisites
+**注：这个仓库只包含从 PAG 4.0 版本开始的最新代码。PAG 3.0 及以下版本的历史记录因开源合规的要求无法对外提供，如需使用 PAG 3.0 的预编译库
+可以从 [这里](https://github.com/tencent/libpag/releases) 下载。**
 
-- Xcode 11.0+
-- GCC 7.0+
-- CMake 3.10.2+
+### 编译环境
+
+- Xcode 11.0 版本及以上
+- GCC 7.0 版本及以上
+- CMake 3.10.2 版本及以上
 - Visual Studio 2019
-- NDK 19.2.5345600 （**Please use this exact version of NDK, other versions may fail.**)
+- NDK 19.2.5345600 （**其他 NDK 版本可能会存在编译报错**)
 
-### Dependency Management
+### 依赖管理
 
-libpag uses `depsync` tool to manage third-party dependencies.
+libpag 使用 depsync 命令行工具管理第三方依赖项。
 
-**For macOS platform：**
+**macOS 平台：**
 
-Just simply run the script in the root of libpag project:
+直接在项目根目录下运行脚本即可安装所有必要工具并进行第三方仓库的同步：
 
 ```
 ./sync_deps.sh
 ```
+**其他平台：**
 
-This script will automatically install necessary tools and synchronize all third-party repositories.
-
-**For other platforms：**
-
-First, make sure you have installed the latest version of node.js (You may need to restart your
-computer after this step). And then run the following command to install depsync tool:
+首先确保您已经安装了最新版本的 [node.js](http://nodejs.org/)，然后使用 npm 安装 depsync 命令行工具 ：
 
 ```
 npm install -g depsync
 ```
 
-And then run `depsync` in the root directory of libpag project.
+首次检出的仓库需要在项目根目录运行 depsync 命令来同步第三方依赖仓库：
 
 ```
 depsync
 ```
 
-Git account and password may be required during synchronizing. Please make sure you have enabled the
-`git-credential-store` so that `CMakeList.txt` can trigger synchronizing automatically next time.
+同步过程可能出现要求输入 git 账号密码，请确保已开启了 git 的凭证存储功能，以便后续可以由 CMake 自动触发同步，无需重复输入密码。
 
-### Build
+### 编译项目
 
-After the synchronization, you can open the project with CLion and build the pag library.
+第三方依赖项都同步完成后，直接使用 CLion 打开项目根目录即可开始编译。若第三方依赖项发生改变，刷新 CMakeLists.txt 文件即可自动同步。
 
-**For macOS platform：**
+**macOS 平台：**
 
-There are no extra configurations of CLion required.
+不需要对 CLion 进行额外配置即可立即编译。**目前只有 macOS 平台支持自动化测试用例的运行。**
 
-**For Windows platform：**
+**Windows 平台：**
 
-Please follow the following steps to configure the CLion environment correctly:
+请参考以下步骤配置好 CLion 之后再进行编译：
 
-- Make sure you have installed at least the **[Desktop development with C++]** and **[Universal Windows Platform development]** components for VS2019.
-- Open the **File->Setting** panel, and go to **Build, Execution, Deployment->ToolChains**, then set the toolchain of CLion to **Visual Studio** with **amd64 (Recommended)** or **x86** architecture.
+- 请确保你的 VS2019 至少同时安装了 **[使用 C++ 的桌面开发]** 和 **[通用 Windows 平台开发]** 两个子模块。
+- 在 CLion 的选项菜单里搜索 **ToolChain** ，设置默认编译工具为 **Visual Studio**，并选择 **amd64（推荐）** 或 **x86** 架构。
 
-**Note: If anything goes wrong during cmake building, please update the cmake commandline tool to the latest
-version and try again.**
+注：**如果在 CMake 编译过程中遇到报错，可以尝试更新 CMake 命令行工具到最新的版本然后重新编译。**
+另外，由于团队日常主要都在 macOS 平台上进行开发，Windows
+平台偶尔可能会出现编译不通过的情况，如果遇到阻塞的问题欢迎通过提交 [issue](https://github.com/Tencent/libpag/issues/new/choose)
+或 [官方论坛](https://bbs.pag.art/)跟我们反馈。
 
-## Support Us
+## 支持我们
 
-If you find libpag is helpful, please give us a **Star**. We sincerely appreciate your support :)
-
-
-[![Star History Chart](https://api.star-history.com/svg?repos=Tencent/libpag&type=Date)](https://star-history.com/#Tencent/libpag&Date)
+如果你觉得 PAG 方案对你有帮助，欢迎给我们的项目加个 **Star**，谢谢大家的支持与鼓励 ：）
 
 
-## License
+[![Stargazers over time](https://starchart.cc/Tencent/libpag.svg)](https://starchart.cc/Tencent/libpag)
 
-libpag is licensed under the [Apache Version 2.0 License](./LICENSE.txt)
+## 协议
 
-## Privacy Policy
+libpag 基于 [Apache-2.0](./LICENSE.txt) 协议开源.
 
-Please comply with [the personal information processing rules of PAG SDK](https://privacy.qq.com/document/preview/01e79d0cc7a2427ba774b88c6beff0fd) while using libpag SDK
+## 隐私政策
 
-## Contribution
+使用 libpag SDK 时请遵守 [PAG SDK个人信息保护规则](https://privacy.qq.com/document/preview/01e79d0cc7a2427ba774b88c6beff0fd).
 
-If you have any ideas or suggestions to improve libpag, welcome to submit
-an [issue](https://github.com/Tencent/libpag/issues/new/choose)
-/ [pull request](https://github.com/Tencent/libpag/pulls). Before making a pull request or issue,
-please make sure to read [Contributing Guide](./CONTRIBUTING.md).
+## 贡献
+
+我们欢迎开发人员为腾讯的开源做出贡献，如果您对改进 libpag
+项目有任何的想法或建议，欢迎给我们提交 [issue](https://github.com/Tencent/libpag/issues/new/choose)
+或 [pull request](https://github.com/Tencent/libpag/pulls) 。 在发起 issue 或 pull request 前,
+请确保您已经阅读 [贡献指南](./CONTRIBUTING.md) 。
 
 

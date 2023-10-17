@@ -1,28 +1,19 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
-
     defaultConfig {
-        applicationId "org.libpag.pagviewer"
+        applicationId "com.tencent.libpag.sample.libpag_sample"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        ndk {
-            abiFilters "armeabi-v7a", "arm64-v8a"
-        }
     }
     buildTypes {
         release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', project(':libpag').file('proguard-rules.pro')
-        }
-        debug {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', project(':libpag').file('proguard-rules.pro')
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -30,71 +21,34 @@ android {
         abortOnError false
     }
 
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
     sourceSets {
-        main.assets.srcDirs = ['../../assets']
-        androidTest.assets.srcDirs = ['../../resources/md5']
+        main {
+            jniLibs.srcDir(['libs'])
+        }
     }
-    namespace 'libpag.pagviewer'
-
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+    namespace 'com.tencent.libpag.sample.libpag_sample'
 }
 
-project.afterEvaluate {
-
-    mergeReleaseNativeLibs.doLast {
-        delete {
-            delete project.getBuildDir().path + '/intermediates/merged_native_libs/release/out/lib/armeabi'
-        }
-        copy {
-            from project.getBuildDir().path + '/intermediates/merged_native_libs/release/out/lib/armeabi-v7a'
-            into project.getBuildDir().path + '/intermediates/merged_native_libs/release/out/lib/armeabi'
-            include '*.so'
-        }
-    }
-    stripReleaseDebugSymbols.doLast {
-        delete {
-            delete project.getBuildDir().path + '/intermediates/stripped_native_libs/release/out/lib/armeabi'
-        }
-        copy {
-            from project.getBuildDir().path + '/intermediates/stripped_native_libs/release/out/lib/armeabi-v7a'
-            into project.getBuildDir().path + '/intermediates/stripped_native_libs/release/out/lib/armeabi'
-            include '*.so'
-        }
-    }
-    // 此处为了方便debug，保留debug版本armeabi的拷贝，方便源码接入时候的调试
-    mergeDebugNativeLibs.doLast {
-        delete {
-            delete project.getBuildDir().path + '/intermediates/merged_native_libs/debug/out/lib/armeabi'
-        }
-        copy {
-            from project.getBuildDir().path + '/intermediates/merged_native_libs/debug/out/lib/armeabi-v7a'
-            into project.getBuildDir().path + '/intermediates/merged_native_libs/debug/out/lib/armeabi'
-            include '*.so'
-        }
-    }
-    stripDebugDebugSymbols.doLast {
-        delete {
-            delete project.getBuildDir().path + '/intermediates/stripped_native_libs/debug/out/lib/armeabi'
-        }
-        copy {
-            from project.getBuildDir().path + '/intermediates/stripped_native_libs/debug/out/lib/armeabi-v7a'
-            into project.getBuildDir().path + '/intermediates/stripped_native_libs/debug/out/lib/armeabi'
-            include '*.so'
-        }
-    }
-}
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "androidx.appcompat:appcompat:$appcompatVersion"
-    debugImplementation project(':libpag')
-    releaseImplementation project(':libpag')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion"
-}
-
-configurations.all {
-    resolutionStrategy.eachDependency { details ->
-        if (details.requested.group == 'com.android.support'
-                && !details.requested.name.contains('multidex') ) {
-            details.useVersion '27.1.1'
-        }
-    }
+    //implementation fileTree(dir: 'libs', include: ['*.aar'])
+    //implementation(name:'libpag-debug',ext:'aar')
+    implementation project(':libpag')
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.navigation:navigation-fragment:2.0.0-rc02'
+    implementation 'androidx.navigation:navigation-ui:2.0.0-rc02'
+    implementation("androidx.exifinterface:exifinterface:1.3.3")
+    implementation "com.airbnb.android:lottie:6.0.0"
+    testImplementation 'junit:junit:4.12'
 }

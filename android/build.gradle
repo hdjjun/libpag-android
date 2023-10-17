@@ -7,10 +7,10 @@ buildscript {
         junitVersion = '4.12'
         compileSdkVersion = 31
         buildToolsVersion = '33.0.2'
-        ndkVersion = '19.2.5345600'
-        minSdkVersion = 18
+        ndkVersion = '25.1.8937393'
+        minSdkVersion = 19
         targetSdkVersion = 31
-        cmakeVersion = '3.10.2'
+        cmakeVersion = '3.16.3'
         agpVersion = '8.0.0'
         appcompatVersion = '1.4.2' // after this version, compileSdkVersion must large than 31
     }

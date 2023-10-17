@@ -1,5 +1,5 @@
 #!/bin/bash -e
-
+./build_ffmpeg_android.sh
 function make_dir() {
   rm -rf $1
   mkdir -p $1
@@ -28,7 +28,7 @@ else
   exit 1
 fi
 
-cmake --build . --target pag -- -j 12
+cmake --build . --target pag -j 12
 RETURN_CODE=$?
 if [ "$RETURN_CODE" -eq "0" ]
 then
