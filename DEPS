@@ -6,11 +6,6 @@
   "repos": {
     "common": [
       {
-        "url": "${PAG_GROUP}/vendor_tools.git",
-        "commit": "de569142433f1c2ed447de01c20bdd908bde8915",
-        "dir": "vendor_tools"
-      },
-      {
         "url": "${PAG_GROUP}/pathkit.git",
         "commit": "f0c4736442a8e640e7f7978b6b9ed322148245bb",
         "dir": "third_party/pathkit"

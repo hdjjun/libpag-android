@@ -72,13 +72,21 @@ PAG 方案目前已经接入了腾讯系 40 余款应用，包括微信，手机
 
 ### 编译项目
 
-1. 执行build_linux.sh,编译
+1. 执行sync_deps.sh
+```
+./sync_deps.sh
+```
+2. 执行build_linux.sh,编译
 ```
 ./build_linux.sh
 ```
-2. 用android studio编译ffavc jni生成arm，arm64，x86_64架构的so
-3. 拷贝步骤2的so到android libpag项目中生成libpag.aar
-4. 引用libpag.aar即可
+3. 用android studio编译ffavc jni生成arm，arm64，x86_64架构的so
+```
+cd android
+./gradlew :ffavc:assembleDebug
+```
+4. 拷贝步骤2的so到android libpag项目中生成libpag.aar
+5. 引用libpag.aar即可
 
 
 
